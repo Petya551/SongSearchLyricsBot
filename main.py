@@ -264,7 +264,7 @@ def get_song_letras(message):
 
                 driver.get(search_link)
                 song_bot.send_message(message.chat.id, "4")
-                song_text = driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div[1]/div/div[4]").text
+                song_text = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[2]/div[2]/div/div[1]/div[4]").text
                 song_bot.send_message(message.chat.id, "5")
 
                 menu = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
