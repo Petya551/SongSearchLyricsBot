@@ -8,6 +8,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait  # for implicit and explict waits
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 
 
 
@@ -220,7 +224,14 @@ def get_song_letras(message):
 
         driver.get("https://www.gl5.ru/")
 
-        input_box = driver.find_element_by_xpath("/html/body/header/div/div[2]/div/div/div/div/form/table/tbody/tr/td[1]/div/table/tbody/tr/td[1]/input")
+        delay = 3  # seconds
+        try:
+            input_box = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, '/html/body/header/div/div[2]/div/div/div/div/form/table/tbody/tr/td[1]/div/table/tbody/tr/td[1]/input')))
+            song_bot.send_message(message.chat.id, "The page is done")
+        except TimeoutException:
+            song_bot.send_message(message.chat.id, "Something went wrong")
+
+        # input_box = driver.find_element_by_xpath("/html/body/header/div/div[2]/div/div/div/div/form/table/tbody/tr/td[1]/div/table/tbody/tr/td[1]/input")
         input_box.send_keys(f"{mssg}")
         song_bot.send_message(message.chat.id, "1")
         input_button = driver.find_element_by_xpath("/html/body/header/div/div[2]/div/div/div/div/form/table/tbody/tr/td[2]/button")
