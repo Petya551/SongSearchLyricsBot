@@ -218,21 +218,16 @@ def get_song_letras(message):
 
         driver.get("https://www.gl5.ru/")
 
-        input_box = driver.find_element_by_xpath(
-            "/html/body/header/div/div[2]/div/div/div/div/form/table/tbody/tr/td[1]/div/table/tbody/tr/td[1]/input")
+        input_box = driver.find_element_by_xpath("/html/body/header/div/div[2]/div/div/div/div/form/table/tbody/tr/td[1]/div/table/tbody/tr/td[1]/input")
         input_box.send_keys(f"{mssg}")
         song_bot.send_message(message.chat.id, "1")
-        input_button = driver.find_element_by_xpath(
-            "/html/body/header/div/div[2]/div/div/div/div/form/table/tbody/tr/td[2]/button")
+        input_button = driver.find_element_by_xpath("/html/body/header/div/div[2]/div/div/div/div/form/table/tbody/tr/td[2]/button")
         input_button.click()
         song_bot.send_message(message.chat.id, "2")
 
         # page_url = driver.current_url
-        if check_exists_by_xpath(
-                f"/html/body/header/div/div[2]/div/div/div/div/div/div[5]/div[2]/div/div/div[1]/div[1]/div[1]/div[1]/div/a"):
-            search_link = driver.find_element_by_xpath(
-                f"/html/body/header/div/div[2]/div/div/div/div/div/div[5]/div[2]/div/div/div[1]/div[1]/div[1]/div[1]/div/a").get_attribute(
-                "href")
+        if check_exists_by_xpath(f"/html/body/header/div/div[2]/div/div/div/div/div/div[5]/div[2]/div/div/div[1]/div[1]/div[1]/div[1]/div/a"):
+            search_link = driver.find_element_by_xpath(f"/html/body/header/div/div[2]/div/div/div/div/div/div[5]/div[2]/div/div/div[1]/div[1]/div[1]/div[1]/div/a").get_attribute("href")
             song_bot.send_message(message.chat.id, "3")
 
             driver.get(search_link)
