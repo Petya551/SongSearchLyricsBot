@@ -261,7 +261,13 @@ def get_song_letras(message):
 
             driver.get("https://lyricshub.ru/")
 
-            input_box = driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/form/input")
+            delay = 3  # seconds
+            try:
+                input_box = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,'/html/body/div[2]/div/div[2]/form/input')))
+                song_bot.send_message(message.chat.id, "The page is done")
+            except TimeoutException:
+                song_bot.send_message(message.chat.id, "Something went wrong")
+            # input_box = driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/form/input")
             input_box.send_keys(f"{mssg}")
             song_bot.send_message(message.chat.id, "1")
             input_button = driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/form/button")
