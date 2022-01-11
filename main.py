@@ -235,7 +235,9 @@ def get_song_name_aurthor(message):
 
     else:
         #----------------------------------------GL5-----------------------------------------------------------------
-        song_bot.send_message(message.chat.id, "Bot can't find lyrics for the song")
+        mssg = song_bot.send_message(message.chat.id, "Bot can't find lyrics for the song")
+        song_bot.register_next_step_handler(mssg, choose_song_action)
+
     #     mssg = message.text
     #     song_bot.send_message(message.chat.id, "Wait a minute...")
     #
