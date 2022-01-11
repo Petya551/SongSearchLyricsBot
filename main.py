@@ -188,12 +188,13 @@ def get_song_name_aurthor(message):
     mssg = message.text
     song_bot.send_message(message.chat.id, "Wait a minute...")
 
-    driver.get("https://mp3uk.net/")
+    driver.get(f"https://mp3uk.net/")
+    song_bot.send_message(message.chat.id, "0")
 
-    input_box = driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/header/div[3]/form/div/input")
+    input_box = driver.find_element_by_xpath(f"/html/body/div[1]/div/div/div/div/header/div[3]/form/div/input")
     input_box.send_keys(f"{mssg}")
     song_bot.send_message(message.chat.id, "1")
-    input_button = driver.find_element_by_xpath("/html/body/div[2]/div/div/div/div/header/div[3]/form/div/button")
+    input_button = driver.find_element_by_xpath(f"/html/body/div[2]/div/div/div/div/header/div[3]/form/div/button")
     input_button.click()
     song_bot.send_message(message.chat.id, "2")
 
